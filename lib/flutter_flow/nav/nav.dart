@@ -134,12 +134,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'passengersList',
               path: 'passengersList',
-              asyncParams: {
-                'booking': getDoc('bookingsAll', BookingsAllRecord.serializer),
-              },
-              builder: (context, params) => PassengersListWidget(
-                booking: params.getParam('booking', ParamType.Document),
-              ),
+              builder: (context, params) => PassengersListWidget(),
             ),
             FFRoute(
               name: 'chatPage',

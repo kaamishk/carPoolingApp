@@ -4,16 +4,13 @@ import '../flutter_flow/chat/index.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PassengersListWidget extends StatefulWidget {
-  const PassengersListWidget({
-    Key? key,
-    this.booking,
-  }) : super(key: key);
-
-  final BookingsAllRecord? booking;
+  const PassengersListWidget({Key? key}) : super(key: key);
 
   @override
   _PassengersListWidgetState createState() => _PassengersListWidgetState();
@@ -25,6 +22,18 @@ class _PassengersListWidgetState extends State<PassengersListWidget> {
   @override
   void initState() {
     super.initState();
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (getCurrentTimestamp >= currentUserDocument!.leaveTime!) {
+        final usersUpdateData = {
+          ...createUsersRecordData(
+            booked: false,
+          ),
+          'riders': FieldValue.delete(),
+        };
+        await currentUserReference!.update(usersUpdateData);
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -126,6 +135,8 @@ class _PassengersListWidgetState extends State<PassengersListWidget> {
                                                 BorderRadius.circular(15),
                                             child: Image.asset(
                                               'assets/images/image(1).jpg',
+                                              width: double.infinity,
+                                              height: 300,
                                               fit: BoxFit.contain,
                                             ),
                                           ),
@@ -329,9 +340,9 @@ class _PassengersListWidgetState extends State<PassengersListWidget> {
                                       .bodyText1
                                       .override(
                                         fontFamily: 'Poppins',
-                                        color: Color(0xA1000000),
+                                        color: Colors.white,
                                         fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.normal,
                                         decoration: TextDecoration.underline,
                                       ),
                                 )),
@@ -372,9 +383,9 @@ class _PassengersListWidgetState extends State<PassengersListWidget> {
                                       .bodyText1
                                       .override(
                                         fontFamily: 'Poppins',
-                                        color: Color(0xA1000000),
+                                        color: Colors.white,
                                         fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.normal,
                                         decoration: TextDecoration.underline,
                                       ),
                                 )),
@@ -405,28 +416,49 @@ class _PassengersListWidgetState extends State<PassengersListWidget> {
                                 )),
                               ),
                               AuthUserStreamWidget(
-                                child: SelectionArea(
-                                    child: Text(
-                                  functions
-                                      .div(
-                                          widget.booking!.totalPrice!,
-                                          (currentUserDocument?.riders
-                                                      ?.toList() ??
-                                                  [])
-                                              .length
-                                              .toDouble())
-                                      .toString(),
-                                  textAlign: TextAlign.end,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        color: Color(0xA1000000),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                )),
+                                child: StreamBuilder<UsersRecord>(
+                                  stream: UsersRecord.getDocument(
+                                      currentUserDocument!.driverID!),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: CircularProgressIndicator(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final textUsersRecord = snapshot.data!;
+                                    return SelectionArea(
+                                        child: Text(
+                                      functions
+                                          .div(
+                                              textUsersRecord.price!,
+                                              (currentUserDocument?.riders
+                                                          ?.toList() ??
+                                                      [])
+                                                  .length
+                                                  .toDouble())
+                                          .toString(),
+                                      textAlign: TextAlign.end,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.normal,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                    ));
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -530,24 +562,24 @@ class _PassengersListWidgetState extends State<PassengersListWidget> {
                                         title: chatInfo.chatPreviewTitle(),
                                         userProfilePic:
                                             chatInfo.chatPreviewPic(),
-                                        color: Color(0xFFEEF0F5),
-                                        unreadColor: Colors.blue,
+                                        color: Color(0x00EEF0F5),
+                                        unreadColor: Colors.white,
                                         titleTextStyle: GoogleFonts.getFont(
                                           'DM Sans',
-                                          color: Colors.black,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
                                         ),
                                         dateTextStyle: GoogleFonts.getFont(
                                           'DM Sans',
-                                          color: Color(0x73000000),
-                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
                                           fontSize: 14,
                                         ),
                                         previewTextStyle: GoogleFonts.getFont(
                                           'DM Sans',
-                                          color: Color(0x73000000),
-                                          fontWeight: FontWeight.normal,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w200,
                                           fontSize: 14,
                                         ),
                                         contentPadding:

@@ -332,18 +332,7 @@ class _SetDriverFieldsWidgetState extends State<SetDriverFieldsWidget> {
                               bookingsAllCreateData,
                               bookingsAllRecordReference);
 
-                          context.pushNamed(
-                            'passengersList',
-                            queryParams: {
-                              'booking': serializeParam(
-                                out1,
-                                ParamType.Document,
-                              ),
-                            }.withoutNulls,
-                            extra: <String, dynamic>{
-                              'booking': out1,
-                            },
-                          );
+                          context.pushNamed('passengersList');
 
                           setState(() {});
                         },
