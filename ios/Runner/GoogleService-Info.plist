@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>543827015573-eik906du8jpatp0ivqv69v378bg5htmq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.543827015573-eik906du8jpatp0ivqv69v378bg5htmq</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>543827015573-qt3dmfmo0cn6u12kd38kd6tajvrai5us.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDs-1kogt_FBZH9TLfG0kIEHKAIMLIBbVk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>543827015573</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fast.carpool</string>
+	<key>PROJECT_ID</key>
+	<string>carpool-5f367</string>
+	<key>STORAGE_BUCKET</key>
+	<string>carpool-5f367.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:543827015573:ios:fd20b8fda8cb55f913e89c</string>
+</dict>
+</plist>
