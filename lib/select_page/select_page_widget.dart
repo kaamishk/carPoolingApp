@@ -78,7 +78,7 @@ class _SelectPageWidgetState extends State<SelectPageWidget> {
                                   EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                               child: SelectionArea(
                                   child: Text(
-                                'What are you loking for today?',
+                                'What are you looking for today?',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -141,7 +141,7 @@ class _SelectPageWidgetState extends State<SelectPageWidget> {
                                           alignment: AlignmentDirectional(0, 0),
                                           child: SelectionArea(
                                               child: Text(
-                                            'Driver',
+                                            'Rider',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -198,7 +198,7 @@ class _SelectPageWidgetState extends State<SelectPageWidget> {
                                           alignment: AlignmentDirectional(0, 0),
                                           child: SelectionArea(
                                               child: Text(
-                                            'Rider',
+                                            'Driver',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
